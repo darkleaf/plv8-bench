@@ -1,0 +1,18 @@
+version: '3'
+
+volumes:
+  node_modules:
+
+services:
+  pg:
+    build: .
+    ports:
+      - "5432:5432"
+  app:
+    image: node
+    working_dir: /usr/src/app
+    links:
+      - pg
+    volumes:
+      - ".:/usr/src/app"
+      - "node_modules:/usr/src/app/node_modules"
